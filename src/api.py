@@ -8,6 +8,7 @@ with the existing backend behavior.
 
 import csv
 import io
+import os
 from typing import Annotated, Literal
 
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile, status
@@ -35,11 +36,17 @@ app = FastAPI(
 	version="1.0.0",
 )
 
-# Keep local frontend origins easy to extend when the React app is introduced.
+# Configure deployed frontend origins as a comma-separated CORS_ORIGINS value.
 LOCAL_FRONTEND_ORIGINS = [
-	"http://localhost:5173",
-	"http://127.0.0.1:5173",
+	origin.strip()
+	for origin in os.getenv("CORS_ORIGINS", "").split(",")
+	if origin.strip()
 ]
+if not LOCAL_FRONTEND_ORIGINS:
+	LOCAL_FRONTEND_ORIGINS = [
+		"http://localhost:5173",
+		"http://127.0.0.1:5173",
+	]
 app.add_middleware(
 	CORSMiddleware,
 	allow_origins=LOCAL_FRONTEND_ORIGINS,
