@@ -6,3 +6,6 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn src.api:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
+    envVars:
+      - key: CORS_ORIGINS
+        value: https://student-performance-prediction-lovat.vercel.app,http://localhost:5173,http://127.0.0.1:5173
