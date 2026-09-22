@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Frontend dependencies and builds
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data and generated artifacts
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/StudentPerformanceFactors.csv
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/cleaned_data.csv
+models/*
+!models/.gitkeep
+!models/best_model.joblib
+outputs/figures/*
+!outputs/figures/.gitkeep
+outputs/results/*
+!outputs/results/.gitkeep
+!outputs/results/model_results.csv
+
+# Local configuration
+.env
+.env.*
+*.log
